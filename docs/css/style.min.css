@@ -536,10 +536,6 @@ h6 {
   letter-spacing: 0.15625rem;
 }
 .alignment__text {
-  color: #000;
-  font-size: 0.9375rem;
-  line-height: 1.5625rem;
-  font-family: "Bebas";
   flex: 1 1 auto;
   margin: 0px 0px 25px 0px;
 }
@@ -548,6 +544,89 @@ h6 {
   flex-direction: column;
   align-items: start;
 }
+
+.upstage-whychoose {
+  background: #000;
+}
+.upstage-whychoose__row {
+  display: flex;
+}
+.upstage-whychoose__column {
+  padding: 4% 2% 4% 0px;
+  flex: 0 0 50%;
+  position: relative;
+}
+@media (max-width: 767.98px) {
+  .upstage-whychoose__column {
+    flex: 1 1 100%;
+  }
+  .upstage-whychoose__column:last-child {
+    display: none;
+  }
+}
+.upstage-whychoose__text {
+  text-align: right;
+  text-transform: uppercase;
+  color: rgb(230, 227, 227);
+  font-size: 2.25rem;
+}
+@media (max-width: 767.98px) {
+  .upstage-whychoose__text {
+    padding: 4%;
+    text-align: left;
+  }
+}
+
+.downstage-whychoose {
+  background: rgb(219, 216, 216);
+}
+.downstage-whychoose__row {
+  display: flex;
+  margin: 0px 20px;
+  flex-wrap: wrap;
+}
+
+.item-downstage {
+  padding: 6% 0px 0px 0px;
+}
+.item-downstage__row {
+  flex: 0 0 50%;
+  display: flex;
+  margin: 0px 0px 5% 0px;
+  padding: 0px 20px;
+}
+@media (max-width: 767.98px) {
+  .item-downstage__row {
+    flex: 1 1 100%;
+  }
+}
+.item-downstage__image {
+  flex: 0 0 26%;
+  padding: 0px 0px 26% 0px;
+  position: relative;
+}
+.item-downstage__image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.text-downstage {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 0px 0px 5px;
+}
+.text-downstage__title {
+  flex: 1 1 auto;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -562,18 +641,42 @@ h6 {
   letter-spacing: 0.09375rem;
   font-family: "Bebas";
 }
+.btn span {
+  position: relative;
+}
+.btn span:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 0;
+  height: 1px;
+  transform: scale(0);
+  -webkit-transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -ms-transition: all 0.5s ease 0s;
+  -o-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+}
 .btn_w {
   padding: 0px 40px;
   color: #000;
   background: #fff;
   text-decoration: none;
 }
-.btn_w span:before {
-  transform: scale(0);
+.btn_w:hover span:before {
+  transform: scale(1);
+  width: 100%;
+  background: #000;
 }
 .btn_b {
   color: #fff;
   background: #000;
+}
+.btn_b:hover span:before {
+  transform: scale(1);
+  width: 100%;
+  background: #fff;
 }
 
 .link {
@@ -599,8 +702,18 @@ h6 {
   left: 0;
   width: 100%;
   height: 1px;
-  background: #fff;
   transform: scale(1);
+  -webkit-transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -ms-transition: all 0.5s ease 0s;
+  -o-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+}
+.link:hover span:before {
+  transform: scale(0);
+}
+.link_w span:before {
+  background: #fff;
 }
 .link_b {
   color: #000;
@@ -642,11 +755,10 @@ h6 {
 }
 
 .simpletext {
-  font-size: 0.875rem;
-  line-height: 1.625rem;
-  font-weight: 300;
-  letter-spacing: 0.15rem;
-  color: #848585;
+  color: #000;
+  font-size: 0.9375rem;
+  line-height: 1.5625rem;
+  font-family: "Bebas";
 }
 
 html.touch .header__link:hover {
