@@ -1,15 +1,12 @@
 import { Router } from "./router.js";
 const router = new Router();
+import { answer } from './middleware.js';
 
 router.post('/save_user_message', (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3030')
-	res.writeHead(200, { 'Content-Type': 'application/json' })
-	res.end(JSON.stringify('ok'));
+	answer(req, res);
 });
 router.get('/save_user_message', (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3030')
-	res.writeHead(200, { 'Content-Type': 'application/json' })
-	res.end(JSON.stringify('ok'));
+	answer(req, res);
 });
 
 export { router };
