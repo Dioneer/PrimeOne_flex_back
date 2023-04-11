@@ -1,6 +1,5 @@
 import http from "http";
 import EventEmitter from "events";
-import { parserBody } from "./middleware.js"
 
 export class Application {
 	constructor() {
@@ -27,7 +26,6 @@ export class Application {
 	}
 	_createServer() {
 		return http.createServer((req, res) => {
-			parserBody(req, res);
 			this.middlewares.forEach(middleware => { middleware(req, res) });
 			const emitted = this.emitter.emit(this._routerMask(req.pathname, req.method), req, res);
 			if (!emitted) {

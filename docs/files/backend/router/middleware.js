@@ -5,32 +5,37 @@ import path from 'path';
 import { createTable } from '../db.connection/usertaks.js'
 
 export const parserJSON = (req, res) => {
-	res.send = (code, contType, data) => {
+	res.send = (code, ct, data) => {
 		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3030')
-		res.writeHead(code, { 'Content-Type': contType })
-		res.end(data);
+		res.writeHead(code), { 'Content-Type': ct }
+		res.end(JSON.stringify(data));
 	}
 };
 
-export const err = (req, res, err) => {
-	res.send(err.httpCode || 400, 'text/plain', String(err))
+export const err = async (req, res, err) => {
+	parserBody(req, res).then(data => res.send(err.httpCode || 400, 'application/json', data))
 	return;
 }
 
-export const answer = (req, res) => {
-	readFile(path.join(path.resolve(), 'savedata.json')).then(data => res.send(200, 'application/json', data))
+export const answer = async (req, res) => {
+	parserBody(req, res).then(data => res.send(err.httpCode || 200, 'application/json', data))
+	return;
 }
 
 export const parserBody = (req, res) => {
-	form.parse(req, async (err, fields) => {
-		if (err) {
-			err(req, res, err);
-		}
-		let resume = await createObj(fields.userName, fields.email_or_phone, fields.message);
-		let resp = await createTable(resume.userName, resume.userEmail, resume.userPhone, resume.userMessage);
-		resume.add = resp;
-		await saveFile(path.resolve('./savedata.json'), JSON.stringify(resume));
-	});
+	return new Promise((res, rej) => {
+		form.parse(req, async (err, fields) => {
+			if (err) {
+				rej(err);
+			}
+			let resume = await createObj(fields.userName, fields.email_or_phone, fields.message);
+			let resp = await createTable(resume.userName, resume.userEmail, resume.userPhone, resume.userMessage);
+			resume.add = resp;
+			await saveFile(path.resolve('./savedata.json'), JSON.stringify(resume));
+			let resumeReadFile = await readFile('./savedata.json');
+			res(resumeReadFile);
+		});
+	})
 };
 
 
